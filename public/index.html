@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gimnasios Guaton</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      /* Estilos generales */
+      body {
+        font-family: 'Poppins', sans-serif;
+        margin: 20px;
+        background-color: #f8f9fa;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: auto;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #00796b;
+      }
+
+      /* Estilo para la galería de imágenes */
+      .image-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .image-gallery div {
+        flex: 1 1 calc(33.33% - 15px);
+        box-sizing: border-box;
+      }
+
+      .image-gallery img {
+        width: 100%;
+        height: auto;
+        border: 2px solid #00796b;
+        border-radius: 10px;
+        transition: transform 0.2s;
+      }
+
+      .image-gallery img:hover {
+        transform: scale(1.05);
+      }
+
+      .caption {
+        text-align: center;
+        margin-top: 5px;
+        font-style: italic;
+        color: #555;
+      }
+
+      /* Estilos responsivos */
+      @media (max-width: 768px) {
+        .image-gallery div {
+          flex: 1 1 calc(50% - 15px);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .image-gallery div {
+          flex: 1 1 100%;
+        }
+      }
+
+      /* Estilo de la barra de navegación */
+      .navbar {
+        background-color: #00796b;
+      }
+
+      .navbar-brand {
+        color: #ffffff;
+        font-weight: bold;
+      }
+
+      .navbar-nav .nav-link {
+        color: #ffffff;
+      }
+
+      .navbar-nav .nav-link:hover {
+        color: #ffd54f;
+      }
+
+      .navbar-toggler {
+        border-color: #ffffff;
+      }
+
+      .navbar-toggler-icon {
+        background-color: #ffffff;
+      }
+
+      .navbar-nav .dropdown-menu {
+        background-color: #00796b;
+      }
+
+      .navbar-nav .dropdown-item {
+        color: #ffffff;
+      }
+
+      .navbar-nav .dropdown-item:hover {
+        background-color: #ffd54f;
+        color: #00796b;
+      }
+
+      /* Estilos para las consultas */
+      .consulta {
+        margin-bottom: 2rem;
+      }
+
+      .consulta h2 {
+        color: #007bff;
+      }
+
+      .resultado {
+        margin-top: 1rem;
+        padding: 0.5rem;
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+      }
+
+      .input-container {
+        margin-top: 0.5rem;
+      }
+
+      .input-container input {
+        margin-right: 0.5rem;
+        padding: 0.4rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .input-container button {
+        padding: 0.4rem 0.8rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .input-container button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Gimnasios Guaton</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Inicio</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">Gimnasios</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">administrador</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Más</a
+              >
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Entrenamiento</a>
+                <a class="dropdown-item" href="#">Membresía</a>
+                <a class="dropdown-item" href="#">Horarios</a>
+              </div>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0 ml-auto">
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Buscar"
+              aria-label="Buscar"
+            />
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+              Buscar
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container" style="margin-top: 80px">
+      <h1>Bienvenido Admin de Gimnasios Guaton</h1>
+      <p>
+        Explora nuestras imágenes y descubre lo que ofrecemos en nuestros
+        gimnasios.
+      </p>
+
+      <!-- Galería de imágenes -->
+      <div class="image-gallery">
+        <div>
+          <img
+            src="https://www.sportlifezonanorte.cl/images/joomgallery/originals/sedes_15/iquique_18/iquique-2_20220609_1632130990.jpg"
+            alt="Gimnasio para principiantes"
+          />
+          <p class="caption">Gimnasio para principiantes</p>
+        </div>
+        <div>
+          <img
+            src="https://www.sportlife.cl/wp-content/uploads/2023/11/Imagen-JPEG-21.jpeg"
+            alt="Equipos modernos"
+          />
+          <p class="caption">Equipos modernos y de calidad</p>
+        </div>
+        <div>
+          <img
+            src="https://www.vallesdelsol.cl/wp-content/uploads/2020/11/gyms.jpg"
+            alt="Instalaciones en Iquique"
+          />
+          <p class="caption">Instalaciones en Iquique</p>
+        </div>
+      </div>
+      <h1>informacion relevante a la empresa</h1>
+      <!-- Consultas -->
+      <div id="consultas">
+        <!-- Las consultas se cargarán dinámicamente aquí -->
+      </div>
+    </div>
+
+    <!-- Scripts para funcionalidad de Bootstrap y consultas -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Listado de consultas con sus endpoints y descripciones
+      const consultas = [
+        {
+          titulo: 'Gym con más ingresos',
+          endpoint: '/consultas/gym-mas-dinero',
+          procesar: (data) =>
+            `<p><strong>ID del Gym:</strong> ${data[0]?.id_local || 'N/A'}</p>
+                     <p><strong>Dinero generado:</strong> $${
+                       data[0]?.dinero_generado || 'N/A'
+                     }</p>`,
+        },
+        {
+          titulo: 'Máquina más utilizada',
+          endpoint: '/consultas/maquina-mas-uso',
+          procesar: (data) =>
+            `<p><strong>ID de la máquina:</strong> ${
+              data[0]?.id_maquina || 'N/A'
+            }</p>
+                     <p><strong>Cantidad de usos:</strong> ${
+                       data[0]?.cantidad_uso || 'N/A'
+                     }</p>`,
+        },
+        {
+          titulo: 'Locales visitados por un usuario',
+          endpoint: '/consultas/local-usuario',
+          necesitaInput: true,
+          placeholder: 'Introduce el RUT del usuario',
+          procesar: (data) =>
+            `<ul>${data
+              .map(
+                (local) =>
+                  `<li><strong>Local:</strong> ${local.id_local}, <strong>Ciudad:</strong> ${local.ciudad}</li>`
+              )
+              .join('')}</ul>`,
+        },
+        {
+          titulo: 'Gyms en Valparaíso',
+          endpoint: '/consultas/gyms-valparaiso',
+          procesar: (data) =>
+            `<ul>${data
+              .map(
+                (gym) =>
+                  `<li><strong>ID Local:</strong> ${gym.id_local}, <strong>Ciudad:</strong> ${gym.ciudad}</li>`
+              )
+              .join('')}</ul>`,
+        },
+        {
+          titulo: 'membresia en particular',
+          endpoint: '/consultas/membresia-usuario',
+          necesitaInput: true,
+          placeholder: 'Introduce el RUT del usuario',
+          procesar: (data) =>
+            `<ul>${data
+              .map(
+                (local) =>
+                  `<li><strong>Local:</strong> ${local.id_local}, <strong>Ciudad:</strong> ${local.ciudad}</li>`
+              )
+              .join('')}</ul>`,
+        },
+        {
+          titulo: 'asistencia a clase',
+          endpoint: '/consultas/usuarios-clase',
+          necesitaInput: true,
+          placeholder: 'Introduce el ID de la clase',
+          procesar: (data) =>
+            `<ul>${data
+              .map(
+                (local) =>
+                  `<li><strong>Local:</strong> ${local.id_local}, <strong>Ciudad:</strong> ${local.ciudad}</li>`
+              )
+              .join('')}</ul>`,
+        },
+        {
+          titulo: 'membresia usario',
+          endpoint: '/consultas/membresia-usuario',
+          necesitaInput: true,
+          placeholder: 'Introduce el ID de la clase',
+          procesar: (data) =>
+            `<ul>${data
+              .map(
+                (local) =>
+                  `<li><strong>Local:</strong> ${local.id_local}, <strong>Ciudad:</strong> ${local.ciudad}</li>`
+              )
+              .join('')}</ul>`,
+        },
+        {
+          titulo: 'trabajadores por gym',
+          endpoint: '/consultas/trabajadores-clases-gym',
+          necesitaInput: true,
+          placeholder: 'Introduce el ID del gym',
+          procesar: (data) =>
+            `<ul>${data
+              .map(
+                (local) =>
+                  `<li><strong>Local:</strong> ${local.id_local}, <strong>Ciudad:</strong> ${local.ciudad}</li>`
+              )
+              .join('')}</ul>`,
+        },
+        {
+          titulo: 'Gyms fuera de Santiago',
+          endpoint: '/consultas/gyms-fuera-santiago',
+          procesar: (data) =>
+            `<ul>${data
+              .map(
+                (gym) =>
+                  `<li><strong>ID Local:</strong> ${gym.id_local}, <strong>Ciudad:</strong> ${gym.ciudad}</li>`
+              )
+              .join('')}</ul>`,
+        },
+        {
+          titulo: 'saldo trabajador',
+          endpoint: '/consultas/salario-trabajador',
+          necesitaInput: true,
+          placeholder: 'Introduce el rut trabajador',
+          procesar: (data) =>
+            `<ul>${data
+              .map(
+                (local) =>
+                  `<li><strong>Local:</strong> ${local.id_local}, <strong>Ciudad:</strong> ${local.ciudad}</li>`
+              )
+              .join('')}</ul>`,
+        },
+        {
+          titulo: 'mas de dos horas en el gym',
+          endpoint: '/consultas/mas-tiempo',
+          procesar: (data) =>
+            `<ul>${data
+              .map(
+                (gym) =>
+                  `<li><strong>ID Local:</strong> ${gym.id_local}, <strong>Ciudad:</strong> ${gym.ciudad}</li>`
+              )
+              .join('')}</ul>`,
+        },
+        {
+          titulo: 'dias de usuario',
+          endpoint: '/consultas/usuarios-estancia-larga',
+          necesitaInput: true,
+          placeholder: 'Introduce el rut usuario',
+          procesar: (data) =>
+            `<ul>${data
+              .map(
+                (local) =>
+                  `<li><strong>Local:</strong> ${local.id_local}, <strong>Ciudad:</strong> ${local.ciudad}</li>`
+              )
+              .join('')}</ul>`,
+        },
+        {
+          titulo: 'usuarios entre septimebre y diciembre',
+          endpoint: '/consultas/diciembre',
+          procesar: (data) =>
+            `<ul>${data
+              .map(
+                (gym) =>
+                  `<li><strong>ID Local:</strong> ${gym.id_local}, <strong>Ciudad:</strong> ${gym.ciudad}</li>`
+              )
+              .join('')}</ul>`,
+        },
+        {
+          titulo: 'membresia mas costosa',
+          endpoint: '/consultas/membresia-mas-cara',
+          procesar: (data) =>
+            `<ul>${data
+              .map(
+                (gym) =>
+                  `<li><strong>ID Local:</strong> ${gym.id_local}, <strong>Ciudad:</strong> ${gym.ciudad}</li>`
+              )
+              .join('')}</ul>`,
+        },
+        {
+          titulo: 'cursos por gym',
+          endpoint: '/consultas/cursos-por-gym',
+          procesar: (data) =>
+            `<ul>${data
+              .map(
+                (gym) =>
+                  `<li><strong>ID Local:</strong> ${gym.id_local}, <strong>Ciudad:</strong> ${gym.ciudad}</li>`
+              )
+              .join('')}</ul>`,
+        },
+      ];
+
+      // Función para cargar las consultas
+      const cargarConsultas = async () => {
+        const consultasDiv = document.getElementById('consultas');
+        consultasDiv.innerHTML = ''; // Limpiar consultas previas
+
+        // Recorrer las consultas
+        for (const consulta of consultas) {
+          const div = document.createElement('div');
+          div.className = 'consulta';
+          div.innerHTML = `
+                    <h2>${consulta.titulo}</h2>
+                    ${
+                      consulta.necesitaInput
+                        ? `
+                        <div class="input-container">
+                            <input type="text" placeholder="${consulta.placeholder}" />
+                            <button>Consultar</button>
+                        </div>`
+                        : `<div class="resultado">Cargando...</div>`
+                    }
+                `;
+          consultasDiv.appendChild(div);
+
+          if (consulta.necesitaInput) {
+            const input = div.querySelector('input');
+            const button = div.querySelector('button');
+            const resultado = document.createElement('div');
+            resultado.className = 'resultado';
+            div.appendChild(resultado);
+
+            button.addEventListener('click', async () => {
+              const inputValue = input.value.trim();
+              if (!inputValue) {
+                resultado.innerHTML =
+                  '<p style="color: red;">Por favor, introduce un valor válido.</p>';
+                return;
+              }
+              try {
+                const queryParam = consulta.endpoint.includes('local-usuario')
+                  ? `rut=${encodeURIComponent(inputValue)}`
+                  : `id=${encodeURIComponent(inputValue)}`;
+
+                const response = await fetch(
+                  `${consulta.endpoint}?${queryParam}`
+                );
+                if (!response.ok)
+                  throw new Error('Error en la consulta al servidor');
+                const data = await response.json();
+                resultado.innerHTML = consulta.procesar(data);
+              } catch (error) {
+                resultado.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+              }
+            });
+          } else {
+            try {
+              const response = await fetch(`${consulta.endpoint}`);
+              if (!response.ok)
+                throw new Error('Error en la consulta al servidor');
+              const data = await response.json();
+              div.querySelector('.resultado').innerHTML =
+                consulta.procesar(data);
+            } catch (error) {
+              div.querySelector(
+                '.resultado'
+              ).innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+            }
+          }
+        }
+      };
+
+      // Cargar todas las consultas al iniciar
+      cargarConsultas();
+    </script>
+  </body>
+</html>
